@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styles from './Modal.module.css'
 import Backdrop from '../Backdrop/Backdrop';
+import PropTypes from 'prop-types';
 
 class Modal extends Component {
     shouldComponentUpdate(nextProps, nextState) {
@@ -10,7 +11,7 @@ class Modal extends Component {
     componentWillUpdate() {
         console.log('[Modal] WillUpdate');
     }
-
+    //! add Style to props
     render() {
         return (
             <>
@@ -24,6 +25,11 @@ class Modal extends Component {
             </>
         )
     }
+}
+
+Modal.propTypes = {
+    show: PropTypes.any,
+    modalClosed: PropTypes.func,
 }
 
 export default Modal;
