@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://burger-builder-cec69-default-rtdb.europe-west1.firebasedatabase.app/'
+    // baseURL: 'https://burger-builder-e39cf-default-rtdb.asia-southeast1.firebasedatabase.app/'
+    baseURL: 'https://swellteaching.backendless.app/api/'
 });
 
 export default instance;

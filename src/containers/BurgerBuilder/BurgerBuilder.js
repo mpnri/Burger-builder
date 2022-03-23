@@ -18,10 +18,11 @@ class BurgerBuilder extends Component{
     }
 
     componentDidMount() {
-        axios.get('/ingredients.json')
+        axios.get('/data/ingredients')
             .then(response => {
                 //setTimeout(()=>{
-                    this.setState({ingredients: response.data});
+                    console.log(response);
+                    this.setState({ingredients: JSON.parse(response.data[0].data)});
                 //}, 1000);                
             })
             .catch(error => {
@@ -71,36 +72,23 @@ class BurgerBuilder extends Component{
     }
 
     purchaseContinueHandler = () => {
-        //alert('You continue!');
-        this.setState({loading: true});
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice.toFixed(2),
-            customer: {
-                name: 'Amir Zouerami',
-                address: {
-                    street: 'Teststreet 1',
-                    zipCode: '9174582541',
-                    country: 'Iran'
-                },
-                email: 'test@test.com'
-            },
-            deliveryMethod: 'fastest'
-        }
-        axios.post('/orders.json', order)
-            .then(response => {
-                console.log(response);
-                //setTimeout(() => {
-                    this.setState({loading: false, purchasing: false});
-                //}, 1000);
-                //this.setState({loading: false, purchasing: false});
-            })
-            .catch(error => {
-                console.log(error);
-                //setTimeout(() => {
-                    this.setState({loading: false, purchasing: false});
-                //}, 1000);
-            });
+        const queryParams = [];
+        for (const [key , val] of Object.entries(this.state.ingredients))
+            queryParams.push(encodeURIComponent(key)+'='+encodeURIComponent(val));
+        queryParams.push(encodeURIComponent('price')+'='+encodeURIComponent(this.state.totalPrice.toFixed(2)));
+        
+        console.log(queryParams);
+        const queryString = queryParams.join('&');
+        this.props.history.push({
+            pathname : '/checkout',
+            search: '?' + queryString,
+            myProps: {
+                salam: 'da',
+                are: 'you Ok?'
+            }
+        });
+        
+        
     }
 
     render(){
