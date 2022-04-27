@@ -120,11 +120,11 @@ class ContactData extends Component {
       customer[data] = this.state.orderForm[data].value;
     });
     const order = {
-      order: {
+      //order: {
         ingredients: this.props.ings,
         price: this.props.price,
         customer: customer,
-      },
+      //},
     };
     console.log(this.state.orderForm);
     axios

@@ -24,7 +24,8 @@ class BurgerBuilder extends Component{
             .then(response => {
                 //setTimeout(()=>{
                     console.log(response);
-                    this.setState({ingredients: JSON.parse(response.data[0].data)});
+                    console.log(response.data[0].data);
+                    this.setState({ingredients: response.data[0].data});
                 //}, 1000);                
             })
             .catch(error => {
